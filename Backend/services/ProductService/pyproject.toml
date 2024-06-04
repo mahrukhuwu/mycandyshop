@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "todoapp"
+version = "0.1.0"
+description = ""
+authors = ["mahrukh <122516122+mahrukhuwu@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.110.0"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
+sqlmodel = "^0.0.16"
+passlib = "^1.7.4"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+types-python-jose = "^3.3.4.20240106"
+types-passlib = "^1.7.7.20240311"
+psycopg = {version = "^3.1.18", extras = ["binary"]}
+bcrypt = "^4.1.2"
+python-multipart = "^0.0.9"
+vercel = "^0.2.1"
+ngrok = "^1.2.0"
+protobuf = "^5.27.0"
+types-protobuf = "^5.26.0.20240422"
+aiokafka = "^0.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.mypy.overrides]]
+module = "feedparser.*"
+ignore_missing_imports = true
+
