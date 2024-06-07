@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "todoapp"
+name = "ProductService"
 version = "0.1.0"
 description = ""
 authors = ["mahrukh <122516122+mahrukhuwu@users.noreply.github.com>"]
