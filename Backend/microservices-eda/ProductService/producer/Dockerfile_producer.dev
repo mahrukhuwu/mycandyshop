@@ -4,21 +4,23 @@ FROM python:3.12
 LABEL maintainer="3mahrukh3@gmail.com"
 
 # Set the working directory in the container
-WORKDIR /products
-
-# Install system dependencies required for potential Python packages
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /Backend/microservices-eda/ProductService/
 
 RUN apt-get update && apt-get install -y protobuf-compiler
+
+# Install system dependencies required for potential Python packages
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    libpq-dev \
+    protobuf-compiler \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
 RUN pip install poetry
 
-# Copy the current directory contents into the container at /products
-COPY . /products/
+# Copy the current directory contents into the container at /Backend/microservices-eda/ProductService/producer
+COPY . .
 
 # Configuration to avoid creating virtual environments inside the Docker container
 RUN poetry config virtualenvs.create false
@@ -27,7 +29,6 @@ RUN poetry config virtualenvs.create false
 RUN poetry install
 
 # Make port 8000 available to the world outside this container
-EXPOSE 8000
+EXPOSE 8000 
 
-# Run the app. CMD can be overridden when starting the container
-CMD ["uvicorn", "Backend.services.ProductService.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "producer.main_producer:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

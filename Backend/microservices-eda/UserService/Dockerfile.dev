@@ -1,0 +1,25 @@
+# Use an official Python runtime as a parent image
+FROM python:3.12
+
+LABEL maintainer="3mahrukh3@gmail.com"
+
+# Set the working directory
+WORKDIR /Backend/microservices-eda/ProductService/UserService/
+
+# Install Poetry
+RUN pip install poetry
+
+# Copy the current directory contents into the container at /Backend/microservices-eda/ProductService/UserService/
+COPY . .
+
+# Configuration to avoid creating virtual environments inside the Docker container
+RUN poetry config virtualenvs.create false
+
+# Install dependencies including development ones
+RUN poetry install
+
+# Expose port 8002
+EXPOSE 8002
+
+# Command to run the application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8002"]
