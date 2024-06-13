@@ -8,8 +8,6 @@ services:
     container_name: user-service-container
     ports:
       - "8002:8002"
-    depends_on:
-      - kong
     networks:
       - kong-network
 
@@ -18,12 +16,11 @@ services:
       context: ./Backend/microservices-eda/ProductService/producer
       dockerfile: Dockerfile_producer.dev
     ports:
-      - "8000:8000"
+      - "8003:8003"
     volumes:
       - ./Backend/microservices-eda/ProductService/producer:/Backend/microservices-eda/ProductService/producer
     depends_on:
       - broker
-      - kong
     networks:
       - kong-network
 
@@ -32,7 +29,7 @@ services:
       context: ./Backend/microservices-eda/ProductService/consumer
       dockerfile: Dockerfile_consumer.dev
     ports:
-      - "8001:8001"
+      - "8004:8004"
     volumes:
       - ./Backend/microservices-eda/ProductService/consumer:/Backend/microservices-eda/ProductService/consumer
     depends_on:
@@ -127,9 +124,6 @@ services:
     depends_on:
       - kong-database
       - kong-migrations
-      - user-service
-      - product_producer
-      - product_consumer
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
@@ -153,26 +147,6 @@ volumes:
 networks:
   kong-network:
     driver: bridge
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

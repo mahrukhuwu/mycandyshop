@@ -17,6 +17,7 @@ types-passlib = "^1.7.7.20240311"
 psycopg = {version = "^3.1.18", extras = ["binary"]}
 bcrypt = "^4.1.2"
 python-multipart = "^0.0.9"
+pip = "^24.0"
 
 [build-system]
 requires = ["poetry-core"]

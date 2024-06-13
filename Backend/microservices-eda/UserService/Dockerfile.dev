@@ -22,4 +22,4 @@ RUN poetry install
 EXPOSE 8002
 
 # Command to run the application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8002"]
+CMD ["uvicorn", "UserManagement:app", "--host", "0.0.0.0", "--port", "8002"]
