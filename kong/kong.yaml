@@ -7,13 +7,13 @@ services:
         paths:
           - /users
   - name: product-service-producer
-    url: http://product_producer:8000
+    url: http://product_producer:8003
     routes:
       - name: product-producer-route
         paths:
           - /products
   - name: product-service-consumer
-    url: http://product_consumer:8001
+    url: http://product_consumer:8004
     routes:
       - name: product-consumer-route
         paths:

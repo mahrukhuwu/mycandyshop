@@ -7,6 +7,7 @@ from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel import SQLModel, Field, Session
 import httpx
+from fastapi.middleware.cors import CORSMiddleware
 
 class ProductModel(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
@@ -25,10 +26,26 @@ app = FastAPI(lifespan=lifespan, title="Product Service Producer",
     version="0.0.1",
     servers=[
         {
-            "url": "http://127.0.0.1:8000",
+            "url": "http://127.0.0.1:8003",
             "description": "Development Server"
         }
     ])
+
+
+# CORS settings
+origins = [
+    "http://127.0.0.1:8002",  # Allow this specific origin
+    # Add other origins if needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def read_root():

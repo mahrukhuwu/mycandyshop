@@ -32,6 +32,21 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 # Application
 app = FastAPI(title="User Service")
 
+# CORS settings
+origins = [
+    "http://127.0.0.1:8003",  # Allow this specific origin
+    # Add other origins if needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
@@ -56,23 +71,6 @@ def verify_password(plain_password, hashed_password):
 
 def get_password_hash(password):
     return pwd_context.hash(password)
-
-# CORS settings
-origins = [
-    "http://127.0.0.1:8003/token","http://127.0.0.1:8003/"  # Allow this specific origin
-    # Add other origins if needed
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):

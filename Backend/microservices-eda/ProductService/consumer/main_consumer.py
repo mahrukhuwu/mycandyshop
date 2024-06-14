@@ -41,7 +41,7 @@ app = FastAPI(lifespan=lifespan, title="Product Service Consumer",
     version="0.0.1",
     servers=[
         {
-            "url": "http://127.0.0.1:8001",
+            "url": "http://127.0.0.1:8004",
             "description": "Development Server"
         }
     ])
